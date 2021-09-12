@@ -1,11 +1,41 @@
-# Start your own "Can of Books" App
+# Project Name
 
-This repository has starter code to begin work on creating your own online bookshelf.
+**Author**: Bashar Aldamen
+**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
 
-## What can books do?
+## Overview
+This App was biult to allow users to render their data and save it in their account.
+<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
-Books are life-changing. They have the power to enlighten, educate, entertain, heal, and help us grow. Build out this code base to create an web app to track what books have impacted you, and what's recommended to read next.
+## Getting Started
+- I clone a specific repo with tamplet.
+- I used Auth0 libraries to get a ready signin, sign-up, and logout forms with a predefined functions.
 
-## Use this template
+<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
 
-Clone this repo to your own account with the green "Use this template" button. Then, add any collaborators. Now you are ready to start adding features! Deploy your site to let the world know which books have had the greatest impact on you, and what's recommended. Enjoy!
+## Architecture
+- we used JavaScript, react.js, and auth0 libraries
+<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
+## Change Log
+- 09/12/2021 4:30 pm - Authentication
+<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+
+01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+
+## Credit and Collaborations
+I would thank Rami Zraigat and Aseel Al-Saqer for their hard work and for being colaborative in building this app. 
+<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+
+
+---
+
+Name of feature: Authentication
+
+Estimate of time needed to complete: 1 hour
+
+Start time: 1:30pm
+
+Finish time: 4:30pm
+
+Actual time needed to complete: 3 hours
