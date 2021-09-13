@@ -8,8 +8,9 @@ import {
   Route
 } from "react-router-dom";
 import Login from './Login';
-import MyFavoriteBooks from './BestBooks';
+import BestBooks from './BestBooks';
 import Profile from './Profile';
+import {withAuth0} from '@auth0/auth0-react'
 class App extends React.Component {
 
   render() {
@@ -22,13 +23,13 @@ class App extends React.Component {
             <Header />
             <Switch>
               <Route exact path="/">
-                {!isAuthenticated && <Login/>}
-                {isAuthenticated && <MyFavoriteBooks/>}
+              {isAuthenticated ? <BestBooks/>: <Login/>}
+                {/* {!isAuthenticated && <Login/>}
+                {isAuthenticated && <MyFavoriteBooks/>} */}
                 {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               </Route>
               <Route exact path="/profile">
-              {isAuthenticated && <Profile/>}
-              {!isAuthenticated && <p>There is No Data</p>}
+              {isAuthenticated? <Profile/> : <p>No Realted Data</p>}
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
               </Route>
 
@@ -42,4 +43,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withAuth0(App);
