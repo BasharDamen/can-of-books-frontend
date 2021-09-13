@@ -8,22 +8,26 @@ import {
   Route
 } from "react-router-dom";
 import Login from './Login';
-import BestBooks from './BestBooks';
+// import BestBooks from './BestBooks';
+import MyFavoriteBooks from "./BestBooks";
 import Profile from './Profile';
 import {withAuth0} from '@auth0/auth0-react'
+import LoginButton from './LoginButton';
 class App extends React.Component {
 
   render() {
     console.log('app', this.props);
-    const isAuthenticated = this.props.auth0;
+    const {isAuthenticated} = this.props.auth0;
     return(
       <>
         <Router>
-          <IsLoadingAndError>
+          {/* <IsLoadingAndError> */}
             <Header />
             <Switch>
               <Route exact path="/">
-              {isAuthenticated ? <BestBooks/>: <Login/>}
+                {isAuthenticated ? <MyFavoriteBooks/> : <Login/>}
+              {/* {isAuthenticated && <Login/>}
+              {isAuthenticated && <MyFavoriteBooks/>} */}
                 {/* {!isAuthenticated && <Login/>}
                 {isAuthenticated && <MyFavoriteBooks/>} */}
                 {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
@@ -36,7 +40,7 @@ class App extends React.Component {
               
             </Switch>
             <Footer />
-          </IsLoadingAndError>
+          {/* </IsLoadingAndError> */}
         </Router>
       </>
     );
