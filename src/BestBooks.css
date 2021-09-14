@@ -1,3 +1,26 @@
 .jumbotron{
   margin-bottom: 0;
 }
+
+button.btn.btn-primary {
+  margin: 40px 30px;
+}
+/* 
+.bastBooksItems {
+  width: 100%;
+  display: grid;
+  place-content: center;
+} */
+
+.upper {
+  width: 100%;
+  display: grid;
+  place-content: center;
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
