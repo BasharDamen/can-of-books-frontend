@@ -1,12 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Jumbotron from "react-bootstrap/Jumbotron";
 import "./BestBooks.css";
 import axios from "axios";
 import { withAuth0 } from "@auth0/auth0-react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Carousel from "react-bootstrap/Carousel";
-
+import BookItem from "./components/BookItem";
+import Button from 'react-bootstrap/Button';
+import BookFormModal from "./components/BookFormModal";
 
 class MyFavoriteBooks extends React.Component {
   constructor(props) {
@@ -15,14 +15,14 @@ class MyFavoriteBooks extends React.Component {
       myBooksArr: [],
     };
   }
-  
+
   componentDidMount = () => {
-    // const { user } = this.props.auth0;
-    // let email = user.email;
+    const { user } = this.props.auth0;
+    let email = user.email;
     axios
-      .get(`http://localhost:3010/books`)
+      .get(`https://can-of-books-database.herokuapp.com/books?email=${email}`)
       .then((result) => {
-        console.log(result.data);
+        console.log(result);
         this.setState({
           myBooksArr: result.data,
         });
@@ -32,33 +32,35 @@ class MyFavoriteBooks extends React.Component {
         console.log("error");
       });
   };
+  deleteBook = (id) =>{
+    const { user } = this.props.auth0;
+    const email = user.email;
 
+    axios
+    .delete(`https://can-of-books-database.herokuapp.com/deletBook/${id}?email=${email}`)
+    .then(result=>{
+      this.setState({
+        myBooksArr : result.data
+      })
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  }
   render() {
     // const isAuthenticated = this.props.auth0;
 
-    return (
-      <Jumbotron>
-          <h1>My Favorite Books</h1>
-          <p>This is a collection of my favorite books</p>
-        <Carousel fade>
-          {this.state.myBooksArr.map((item) =>{
-            return (<Carousel.Item>
-            <img
-              className="d-block w-100"
-              src={item.imgURL}
-              alt="First slide"
-            />
-            <Carousel.Caption>
-              <h3>Title: {item.title}</h3>
-              <p>Overview: {item.description}</p>
-            </Carousel.Caption>
-          </Carousel.Item>)})}
-        </Carousel>
-        {/* {this.state.myBooksArr.map((item) => {
-          return <p>{item.title}</p>;
-        })} */}
-      </Jumbotron>
-    );
+    return <div className="bastBooksItems">
+      <div className="upper">
+
+    <h1>My Favourite Books</h1>
+    <BookFormModal/>
+    </div>
+    <BookItem
+    myBooksArr = {this.state.myBooksArr}
+    deleteBook = {this.deleteBook}
+    />
+    </div>;
   }
 }
 

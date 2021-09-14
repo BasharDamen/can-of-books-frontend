@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './Header';
-import IsLoadingAndError from './IsLoadingAndError';
 import Footer from './Footer';
 import {
   BrowserRouter as Router,
@@ -19,9 +18,8 @@ class App extends React.Component {
     console.log('app', this.props);
     const {isAuthenticated} = this.props.auth0;
     return(
-      <>
+      <main>
         <Router>
-          {/* <IsLoadingAndError> */}
             <Header />
             <Switch>
               <Route exact path="/">
@@ -33,16 +31,15 @@ class App extends React.Component {
                 {/* TODO: if the user is logged in, render the `BestBooks` component, if they are not, render the `Login` component */}
               </Route>
               <Route exact path="/profile">
-              {isAuthenticated? <Profile/> : <p>No Realted Data</p>}
+              <Profile/>
               {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
               </Route>
 
               
             </Switch>
             <Footer />
-          {/* </IsLoadingAndError> */}
         </Router>
-      </>
+      </main>
     );
   }
 }
