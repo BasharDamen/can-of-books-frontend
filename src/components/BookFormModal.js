@@ -4,7 +4,6 @@ import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { withAuth0 } from "@auth0/auth0-react";
-import axios from "axios";
 
 class BookFormModal extends React.Component {
   constructor(props) {
@@ -18,81 +17,71 @@ class BookFormModal extends React.Component {
     };
   }
 
-  handleClose = () => {
-    this.setState({
-      showModal: false,
-    });
-  };
+  // handleClose = () => {
+  //   this.setState({
+  //     showModal: false,
+  //   });
+  // };
 
-  handleShow = () => {
-    this.setState({
-      showModal: true,
-    });
-  };
+  // handleShow = () => {
+  //   this.setState({
+  //     showModal: true,
+  //   });
+  // };
 
-  addBook = (event) => {
-    event.preventDefault();
-    console.log("hi");
-    const { user } = this.props.auth0;
-    const email = user.email;
-    let bookObj = {
-      bookTitle: this.state.title,
-      bookDescription: this.state.description,
-      bookStatus: this.state.status,
-      clientEmail: email,
-    };
-    console.log(bookObj);
-    axios
-      .post(`https://can-of-books-database.herokuapp.com/addBook`, bookObj)
-      .then((result) => {
-        this.setState({
-          favBooksArr: result.data,
-          showModal: false,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  // addBook = (event) => {
+  //   event.preventDefault();
+  //   console.log("hi");
+  //   const { user } = this.props.auth0;
+  //   const email = user.email;
+  //   let bookObj = {
+  //     bookTitle: this.state.title,
+  //     bookDescription: this.state.description,
+  //     bookStatus: this.state.status,
+  //     clientEmail: email,
+  //   };
+  //   console.log(bookObj);
+  //   axios
+  //     .post(`https://can-of-books-database.herokuapp.com/addBook`, bookObj)
+  //     .then((result) => {
+  //       this.setState({
+  //         favBooksArr: result.data,
+  //         showModal: false,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // };
   render() {
     return (
       <>
-        <Button variant="primary" onClick={this.handleShow}>
-          Add Book
-        </Button>
-        <Modal show={this.state.showModal} onHide={this.handleClose}>
+        <Modal show={this.props.show} onHide={this.props.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Book Information</Modal.Title>
           </Modal.Header>
-          <Form>
-            <Form.Group className="mb-3" name="bookTitle" controlId="bookTitle">
+          <Form onSubmit={this.props.addBook}>
+            <Form.Group className="mb-3"  controlId="bookTitle">
               <Form.Label>Book Title</Form.Label>
               <Form.Control
-                onChange={(event) =>
-                  this.setState({ title: event.target.value })
-                }
                 type="text"
+                name="bookTitle"
               />
             </Form.Group>
 
             <Form.Group
               className="mb-3"
-              name="bookDescription"
+              
               controlId="bookDescription"
             >
               <Form.Label>Description</Form.Label>
               <Form.Control
-                onChange={(event) =>
-                  this.setState({ description: event.target.value })
-                }
                 type="text"
+                name="bookDescription"
               />
             </Form.Group>
 
             <Form.Select
-              onChange={(event) =>
-                this.setState({ status: event.target.value })
-              }
               name="bookStatus"
               aria-label="bookStatus"
             >
@@ -100,15 +89,13 @@ class BookFormModal extends React.Component {
               <option value="In Progress">In Progress</option>
               <option value="Done">Done</option>
             </Form.Select>
-          </Form>
-          <Modal.Footer>
-            <Button variant="primary" type="submit" onClick={this.addBook}>
+            <Button variant="primary" type="submit">
               Submit
             </Button>
-            <Button variant="secondary" onClick={this.handleClose}>
+            <Button variant="secondary" onClick={this.props.handleClose}>
               Cancel
             </Button>
-          </Modal.Footer>
+          </Form>
         </Modal>
       </>
     );
